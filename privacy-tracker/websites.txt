@@ -1,0 +1,8 @@
+# Sample websites for privacy tracking
+# One URL per line
+
+google.com
+facebook.com
+twitter.com
+amazon.com
+baidu.com 
