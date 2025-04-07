@@ -10,11 +10,13 @@ import seaborn as sns
 from openai import OpenAI
 import json
 import gdown
+import os
 
 # Initialize OpenAI client configured for OpenRouter
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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"  # No weird character
+    api_key=os.getenv('OPENAI_API_KEY')
+
 )
 
 # Configuration
