@@ -4,3 +4,5 @@ llama_predictions.csv
 llama_results.png
 
 rf_results.png
+
+.env
