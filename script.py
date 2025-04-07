@@ -11,6 +11,9 @@ from openai import OpenAI
 import json
 import gdown
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Initialize OpenAI client configured for OpenRouter
 client = OpenAI(
