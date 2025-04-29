@@ -1,0 +1,101 @@
+true_label,predicted,confidence,reason
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,"The provided data lacks context and specific information about JavaScript function behavior, making it impossible to accurately classify as tracking or non-tracking."
+1,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+0,0,low,"The provided data lacks context and specific indicators of tracking user behavior, such as accessing personal data or sending data to external sources."
+1,0,low,The provided data lacks context and specific identifiers to accurately determine tracking behavior.
+0,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or external data transmission."
+0,0,low,"The provided features are numerical values without context, making it impossible to determine if they relate to tracking user behavior or not."
+0,0,low,The provided data lacks context and does not clearly indicate tracking behavior or access to user-specific data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+1,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,The provided data lacks context and specific indicators of tracking user behavior or handling personal data.
+1,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+0,0,low,"The provided data lacks context and specific indicators of tracking user behavior, such as accessing personal data or sending data to external sources."
+0,0,low,The provided data lacks context and specific indicators of tracking user behavior or handling personal data.
+0,0,low,The provided data lacks context and specific identifiers to accurately determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+0,0,low,"The provided data lacks context and specific indicators of tracking user behavior, such as accessing personal data or sending data externally."
+0,0,low,"The provided data lacks context and specific indicators of tracking behavior such as accessing user identifiers, sending data externally, or using fingerprinting techniques."
+1,0,low,"The provided features are numerical values without context, making it impossible to determine their relevance to tracking user behavior."
+1,0,low,"The provided data lacks context and specific details about JavaScript function behavior, making it impossible to accurately determine tracking activity."
+0,0,low,The provided data lacks context and specific identifiers to determine if it relates to tracking user behavior or not.
+0,0,low,The provided data lacks context and specific indicators of user tracking or behavior monitoring.
+0,0,low,The provided data lacks context and specific indicators of tracking behavior such as access to personal data or external data transmission.
+0,0,low,The provided data lacks context and specific identifiers related to user tracking or behavior monitoring.
+0,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+0,0,low,The provided features lack context and specific identifiers related to user tracking or behavior monitoring.
+1,0,low,The provided data lacks context and specific identifiers to determine tracking behavior accurately.
+0,0,low,The provided features lack context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior. It appears to be numerical values without clear connection to user behavior or data transmission.
+1,0,low,The provided data lacks context and does not clearly indicate tracking behavior or access to user-specific data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior accurately.
+1,0,low,"The provided features do not clearly indicate access to user identifiers, personal data, or external data transmission which are typical of tracking functions."
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,"The provided data lacks context and specific information about JavaScript function behavior, making it impossible to accurately classify based on tracking or non-tracking characteristics."
+0,0,low,The provided data lacks context and specific identifiers related to user tracking or behavior monitoring.
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,Insufficient context and description of features to determine tracking behavior
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior accurately.
+0,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+1,0,low,The provided data lacks context and does not clearly indicate tracking behavior or access to personal data.
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,"The provided data lacks context and specific indicators of tracking behavior, such as access to personal data or external data transmission."
+0,0,low,The provided data lacks context and specific indicators of user tracking or behavior monitoring.
+0,0,low,"The provided features lack context and specific identifiers related to tracking user behavior, such as accessing personal data or sending data to external sources."
+0,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+0,0,low,The provided data lacks context and does not clearly indicate tracking or non-tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior accurately.
+0,0,low,The provided data lacks context and does not clearly indicate tracking or non-tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or tracking-related activities."
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,"The provided data lacks context and specific indicators of tracking or non-tracking behavior, making it difficult to classify accurately without additional information."
+0,0,low,"The provided features are numerical values without context, making it impossible to determine if they relate to tracking user behavior or not."
+0,0,low,The provided data lacks context and specific identifiers to accurately determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,"The provided data lacks context and specific information about JavaScript function behavior, making it difficult to accurately classify tracking activity."
+0,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+1,0,low,The provided data lacks context and does not clearly indicate tracking or non-tracking behavior.
+0,0,low,The provided features lack context and specific identifiers related to user tracking or behavior monitoring.
+0,0,low,The provided data lacks context and does not clearly indicate tracking behavior or access to personal data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+1,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or tracking-specific behavior."
+1,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,"The provided data lacks context and specific indicators of tracking behavior such as accessing user identifiers, sending data externally, or using fingerprinting techniques."
+0,0,low,The provided data lacks context and specific identifiers related to user tracking or behavior monitoring.
+0,0,low,"The provided features are numerical values without context, making it impossible to determine if they relate to tracking user behavior or not."
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+1,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or external data transmission typical of tracking functions."
+0,0,low,"The provided features are numerical values without context, making it impossible to determine if they relate to tracking user behavior or not."
+0,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or tracking-specific behavior."
+1,0,low,"The provided data lacks context and specific information about functionality or behavior, making it impossible to determine if it relates to user tracking or not."
+1,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+1,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or external data transmission typical of tracking functions."
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,"The provided data lacks context and specific indicators of tracking behavior, such as access to personal data or external data transmission."
+1,0,low,"The provided data lacks context and specific identifiers related to tracking user behavior, such as accessing personal data or sending data to external sources."
+0,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers to conclusively determine tracking behavior.
+1,0,low,The provided data lacks context and specific identifiers related to user tracking or behavior monitoring.
+0,0,low,The provided data lacks context and does not specify any behavior or functionality related to JavaScript functions or user tracking.
+1,0,low,The provided data lacks context and specific identifiers related to user tracking or behavior monitoring.
+0,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or external data transmission typical of tracking functions."
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
+0,0,low,"The provided data lacks context and does not clearly indicate access to user identifiers, personal data, or external data transmission typical of tracking functions."
+1,0,low,"The provided data lacks context and specific indicators of tracking behavior such as accessing user identifiers, sending data externally, or using fingerprinting techniques."
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,The provided features lack context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior. It appears numerical and abstract without clear links to user data or external communication.
+0,0,low,The provided features lack context and specific identifiers to conclusively determine tracking behavior.
+0,0,low,The provided data lacks context and specific identifiers related to tracking user behavior or handling personal data.
+0,0,low,"The provided features are numerical values without context, making it impossible to determine their relevance to tracking user behavior."
+0,0,low,The provided data lacks context and specific identifiers to determine tracking behavior.
