@@ -117,9 +117,9 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">NoT.js 隐私追踪分析器</h1>
+          <h1 className="text-3xl font-bold text-gray-900">NoT.js privacy tracker</h1>
           <p className="mt-1 text-sm text-gray-500">
-            基于大语言模型增强的网站隐私行为分析工具
+            Based on LLM
           </p>
         </div>
       </header>
@@ -129,9 +129,9 @@ export default function Home() {
           {/* File upload section */}
           <div className="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
             <div className="px-4 py-5 sm:px-6">
-              <h2 className="text-lg font-medium text-gray-900">上传网站列表</h2>
+              <h2 className="text-lg font-medium text-gray-900">upload website lists</h2>
               <p className="mt-1 text-sm text-gray-500">
-                上传一个包含网站 URL 列表的 TXT 文件（每行一个网址）
+                upload a website with a txt file with URL
               </p>
             </div>
             
@@ -154,9 +154,9 @@ export default function Home() {
                         onChange={handleFileSelect}
                       />
                     </label>
-                    <p className="pl-1">或拖放至此处</p>
+                    <p className="pl-1">drag here</p>
                   </div>
-                  <p className="text-xs text-gray-500">仅支持 TXT 文件</p>
+                  <p className="text-xs text-gray-500">only support txt</p>
                 </div>
               </div>
               
@@ -168,7 +168,7 @@ export default function Home() {
                     className="text-sm text-red-600"
                     onClick={() => setFile(null)}
                   >
-                    移除
+                    delete
                   </button>
                 </div>
               )}
@@ -189,10 +189,10 @@ export default function Home() {
                   {isUploading || isAnalyzing ? (
                     <>
                       <Loader className="w-4 h-4 mr-2 animate-spin" />
-                      {isUploading ? '上传中...' : '分析中...'}
+                      {isUploading ? 'uploading...' : 'analyzing...'}
                     </>
                   ) : (
-                    '开始追踪'
+                    'now tracking'
                   )}
                 </button>
               </div>
@@ -203,9 +203,9 @@ export default function Home() {
           {results.length > 0 && (
             <div className="mt-6 bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
               <div className="px-4 py-5 sm:px-6">
-                <h2 className="text-lg font-medium text-gray-900">分析结果</h2>
+                <h2 className="text-lg font-medium text-gray-900">result</h2>
                 <p className="mt-1 text-sm text-gray-500">
-                  基于 NoT.js 和 ChatGPT 的网站隐私行为分析
+                  based on NoT.js 和 ChatGPT website privacy tracking analysis
                 </p>
               </div>
               
