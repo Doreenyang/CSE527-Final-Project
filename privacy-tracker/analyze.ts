@@ -7,10 +7,10 @@ import fs from 'fs/promises';
 import path from 'path';
 import { trackWebsite } from './tracker';
 
-// 开发模式下的最大网站分析数量限制
+
 const MAX_WEBSITES_TO_ANALYZE = 3;
 
-// 定义结果类型
+
 interface AnalysisResult {
   url: string;
   behaviorSummary?: string;
@@ -27,14 +27,14 @@ interface AnalysisResult {
  */
 export async function readWebsites(filePath: string): Promise<string[]> {
   try {
-    console.log(`读取网站列表文件: ${filePath}`);
+    console.log(`read website file: ${filePath}`);
     const content = await fs.readFile(filePath, 'utf8');
     const websites = content
       .split('\n')
       .map(line => line.trim())
       .filter(line => line && !line.startsWith('#'));
     
-    console.log(`已读取 ${websites.length} 个网站`);
+    console.log(`already read ${websites.length} website`);
     return websites;
   } catch (error) {
     console.error(`Error reading website file: ${error instanceof Error ? error.message : String(error)}`);
@@ -48,7 +48,7 @@ export async function readWebsites(filePath: string): Promise<string[]> {
  * @returns {Promise<Object>} - Analysis results
  */
 export async function analyzeWebsite(url: string): Promise<AnalysisResult> {
-  console.log(`开始分析 ${url}...`);
+  console.log(`now analyze ${url}...`);
   
   try {
     // Normalize URL (add https:// if missing)
@@ -58,12 +58,12 @@ export async function analyzeWebsite(url: string): Promise<AnalysisResult> {
     
     // Track website behavior
     const chain = await trackWebsite(url);
-    console.log(`${url} 行为跟踪完成，收集了 ${chain.nodes.length} 个观察结果`);
+    console.log(`${url} tracking behavior complete ${chain.nodes.length} result`);
     
     // Classify the behavior using GPT
-    console.log(`开始使用 GPT 对 ${url} 进行分类...`);
+    console.log(`use Gpt ${url} to classify`);
     const classification = await chain.classify();
-    console.log(`${url} 分类完成: ${classification.category}`);
+    console.log(`${url} classify complete: ${classification.category}`);
     
     return {
       url,
@@ -90,10 +90,10 @@ export async function analyzeWebsite(url: string): Promise<AnalysisResult> {
 export async function analyzeWebsites(urls: string[]): Promise<AnalysisResult[]> {
   const results: AnalysisResult[] = [];
   
-  // 限制分析的网站数量
+
   const sitesToAnalyze = urls.slice(0, MAX_WEBSITES_TO_ANALYZE);
   if (sitesToAnalyze.length < urls.length) {
-    console.log(`注意: 为了开发测试，仅分析前 ${MAX_WEBSITES_TO_ANALYZE} 个网站`);
+    console.log(`waring: for testing only show ${MAX_WEBSITES_TO_ANALYZE} website`);
   }
   
   for (const url of sitesToAnalyze) {
@@ -101,10 +101,10 @@ export async function analyzeWebsites(urls: string[]): Promise<AnalysisResult[]>
       const result = await analyzeWebsite(url);
       results.push(result);
     } catch (error) {
-      console.error(`分析 ${url} 时发生致命错误:`, error);
+      console.error(`analyze ${url} error:`, error);
       results.push({
         url,
-        error: `致命错误: ${error instanceof Error ? error.message : String(error)}`,
+        error: `important error: ${error instanceof Error ? error.message : String(error)}`,
         timestamp: new Date().toISOString()
       });
     }
@@ -121,17 +121,17 @@ export async function analyzeWebsites(urls: string[]): Promise<AnalysisResult[]>
 export async function analyzeFromFile(filePath: string): Promise<AnalysisResult[]> {
   try {
     const websites = await readWebsites(filePath);
-    console.log(`找到 ${websites.length} 个网站需要分析`);
+    console.log(`find ${websites.length} website to analyze`);
     
     if (websites.length === 0) {
-      console.warn('警告: 没有找到要分析的网站');
+      console.warn('waring:cannot find websites');
       return [];
     }
     
     return await analyzeWebsites(websites);
   } catch (error) {
-    console.error('分析文件时发生错误:', error);
-    throw error; // 向上传递错误以便 API 能够捕获
+    console.error('error happned while analyzing', error);
+    throw error; 
   }
 }
 
