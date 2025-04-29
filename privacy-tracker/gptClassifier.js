@@ -8,10 +8,10 @@ const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
 
-// 确保 API 密钥已加载
+
 let openaiApiKey = process.env.OPENAI_API_KEY;
 
-// 如果环境变量未加载，尝试直接从文件读取
+
 if (!openaiApiKey || openaiApiKey === 'your_openai_api_key_here') {
   try {
     const envContent = fs.readFileSync(path.join(process.cwd(), '.env'), 'utf-8');
@@ -26,15 +26,15 @@ if (!openaiApiKey || openaiApiKey === 'your_openai_api_key_here') {
 }
 
 /**
- * 使用模拟分类，当无法访问 OpenAI API 时使用
+ * use while cannot use gpt
  */
 function mockClassify(behaviorText) {
-  console.log('使用模拟分类器 (无法连接OpenAI)');
+  console.log('use it while cannot connect to openAI');
   
-  // 基于关键词的简单规则分类
+ 
   const trackerKeywords = [
     'google-analytics', 'facebook', 'pixel', 'tracker',
-    '跟踪器', '读取了 cookie', '写入了 cookie'
+    'tracker1', 'read cookie', 'write cookie'
   ];
   
   const hasTrackers = trackerKeywords.some(keyword => 
@@ -44,13 +44,13 @@ function mockClassify(behaviorText) {
   if (hasTrackers) {
     return {
       category: 'B',
-      reasoning: '模拟分类: B. 可疑行为 - 检测到部分跟踪器或Cookie读写行为',
+      reasoning: 'Simulated Classification: B. suspicious hehavior - detected partial tracker or cookie read/write activity',
       rawBehaviors: behaviorText
     };
   } else {
     return {
       category: 'C',
-      reasoning: '模拟分类: C. 安全行为 - 未检测到明显的跟踪行为',
+      reasoning: 'Simulated Classification: C. safe behavior - no obvious tracking behavior detected',
       rawBehaviors: behaviorText
     };
   }
@@ -64,23 +64,23 @@ function mockClassify(behaviorText) {
 async function classifyWithGPT(behaviorText) {
   try {
     if (!openaiApiKey || openaiApiKey === 'your_openai_api_key_here') {
-      console.warn('警告: OpenAI API 密钥未设置, 使用模拟分类');
+      console.warn('warning: OpenAI API key not set, Simulated Classification');
       return mockClassify(behaviorText);
     }
 
-    console.log('正在使用 OpenAI API 进行分类...');
+    console.log('now using OpenAI API to classify...');
     
-    const prompt = `你是隐私安全分析专家。以下是某网站行为列表，请判断其是否涉及用户隐私泄露。
+    const prompt = `You are the privacy expert. Below are website behavior list. Please analyze where there are risks of privacy leaks.
 
-【行为列表】
+【behavior list】
 ${behaviorText}
 
-请选择：
-A. 明显隐私泄露
-B. 可疑行为
-C. 安全行为
+now choose：
+A. obvious tracking behavior
+B. suspicious behavior
+C. safe behavior
 
-请返回分类（A/B/C）及一句理由。`;
+please output the classification（A/B/C）and a one sentence explanation`;
 
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -89,7 +89,7 @@ C. 安全行为
         messages: [
           {
             role: 'system',
-            content: '你是一个擅长分析网站隐私安全问题的专家。你的回复应简洁明了，只包含分类结果和简短理由。'
+            content: 'You are a privacy expert. You reply is simple and correct, only contain classify result and one-sentence reason.'
           },
           {
             role: 'user',
@@ -108,7 +108,7 @@ C. 安全行为
     );
 
     const result = response.data.choices[0].message.content.trim();
-    console.log('OpenAI 返回结果:', result);
+    console.log('OpenAI return result:', result);
     
     // Extract the classification (A/B/C) and reasoning
     const classificationMatch = result.match(/^([ABC])[.\s:]/i);
@@ -121,8 +121,8 @@ C. 安全行为
     };
   } catch (error) {
     console.error('Error classifying with GPT:', error.message);
-    // 当 OpenAI API 错误时使用模拟分类
-    console.log('切换到模拟分类');
+    
+    console.log('chang to simulated classification');
     return mockClassify(behaviorText);
   }
 }
