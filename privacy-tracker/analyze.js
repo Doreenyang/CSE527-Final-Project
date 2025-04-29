@@ -7,7 +7,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { trackWebsite } = require('./tracker');
 
-// 开发模式下的最大网站分析数量限制
+
 const MAX_WEBSITES_TO_ANALYZE = 3;
 
 /**
@@ -17,14 +17,14 @@ const MAX_WEBSITES_TO_ANALYZE = 3;
  */
 async function readWebsites(filePath) {
   try {
-    console.log(`读取网站列表文件: ${filePath}`);
+    console.log(`read website file: ${filePath}`);
     const content = await fs.readFile(filePath, 'utf8');
     const websites = content
       .split('\n')
       .map(line => line.trim())
       .filter(line => line && !line.startsWith('#'));
     
-    console.log(`已读取 ${websites.length} 个网站`);
+    console.log(`already read ${websites.length} websites`);
     return websites;
   } catch (error) {
     console.error(`Error reading website file: ${error.message}`);
@@ -38,7 +38,7 @@ async function readWebsites(filePath) {
  * @returns {Promise<Object>} - Analysis results
  */
 async function analyzeWebsite(url) {
-  console.log(`开始分析 ${url}...`);
+  console.log(`now analyze ${url}...`);
   
   try {
     // Normalize URL (add https:// if missing)
@@ -48,12 +48,12 @@ async function analyzeWebsite(url) {
     
     // Track website behavior
     const chain = await trackWebsite(url);
-    console.log(`${url} 行为跟踪完成，收集了 ${chain.nodes.length} 个观察结果`);
+    console.log(`${url} tracking complete ${chain.nodes.length} `);
     
     // Classify the behavior using GPT
-    console.log(`开始使用 GPT 对 ${url} 进行分类...`);
+    console.log(`use GPT to ${url} classify...`);
     const classification = await chain.classify();
-    console.log(`${url} 分类完成: ${classification.category}`);
+    console.log(`${url} complete: ${classification.category}`);
     
     return {
       url,
@@ -80,10 +80,10 @@ async function analyzeWebsite(url) {
 async function analyzeWebsites(urls) {
   const results = [];
   
-  // 限制分析的网站数量
+  
   const sitesToAnalyze = urls.slice(0, MAX_WEBSITES_TO_ANALYZE);
   if (sitesToAnalyze.length < urls.length) {
-    console.log(`注意: 为了开发测试，仅分析前 ${MAX_WEBSITES_TO_ANALYZE} 个网站`);
+    console.log(`for testing,only show  ${MAX_WEBSITES_TO_ANALYZE} website`);
   }
   
   for (const url of sitesToAnalyze) {
@@ -91,10 +91,10 @@ async function analyzeWebsites(urls) {
       const result = await analyzeWebsite(url);
       results.push(result);
     } catch (error) {
-      console.error(`分析 ${url} 时发生致命错误:`, error);
+      console.error(`analyze ${url} error:`, error);
       results.push({
         url,
-        error: `致命错误: ${error.message}`,
+        error: `error: ${error.message}`,
         timestamp: new Date().toISOString()
       });
     }
@@ -111,17 +111,17 @@ async function analyzeWebsites(urls) {
 async function analyzeFromFile(filePath) {
   try {
     const websites = await readWebsites(filePath);
-    console.log(`找到 ${websites.length} 个网站需要分析`);
+    console.log(`find ${websites.length} website to analyze`);
     
     if (websites.length === 0) {
-      console.warn('警告: 没有找到要分析的网站');
+      console.warn('waring: no website to analyze');
       return [];
     }
     
     return await analyzeWebsites(websites);
   } catch (error) {
-    console.error('分析文件时发生错误:', error);
-    throw error; // 向上传递错误以便 API 能够捕获
+    console.error('error while analyzing', error);
+    throw error; 
   }
 }
 
