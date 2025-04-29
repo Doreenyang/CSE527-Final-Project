@@ -7,33 +7,33 @@ let puppeteer;
 try {
   puppeteer = require('puppeteer');
 } catch (err) {
-  console.error('Puppeteer 加载失败:', err.message);
+  console.error('Puppeteer loading error:', err.message);
 }
 
 const { ThoughtNode, ThoughtChain } = require('./not');
 
 /**
- * 简化版的网站跟踪，当 Puppeteer 无法正常工作时使用
+ * use it when Puppeteer does not function well.
  */
 async function simplifiedTrack(url) {
-  console.log('使用简化版跟踪功能 (Puppeteer可能不可用)');
+  console.log('use the simplified tracking (Puppeteer may not function well)');
   const chain = new ThoughtChain(url);
   
-  // 添加模拟的行为节点
-  chain.addNode(new ThoughtNode('navigation', `访问网站 ${url}`, { url }));
-  chain.addNode(new ThoughtNode('request', `模拟: 页面可能请求了跟踪器`, { url: url + '/tracking' }));
-  chain.addNode(new ThoughtNode('cookie', '模拟: 脚本可能读取了 document.cookie', { action: 'read' }));
   
-  // 根据网站域名添加一些特定的行为
+  chain.addNode(new ThoughtNode('navigation', `visit website ${url}`, { url }));
+  chain.addNode(new ThoughtNode('request', `simulation: website request tracker`, { url: url + '/tracking' }));
+  chain.addNode(new ThoughtNode('cookie', 'simulation: script read document.cookie', { action: 'read' }));
+  
+  
   if (url.includes('google')) {
-    chain.addNode(new ThoughtNode('script', '模拟: 页面加载了 Google Analytics', { url: 'https://www.google-analytics.com/analytics.js' }));
+    chain.addNode(new ThoughtNode('script', 'simulation: page loads Google Analytics', { url: 'https://www.google-analytics.com/analytics.js' }));
   } else if (url.includes('facebook')) {
-    chain.addNode(new ThoughtNode('script', '模拟: 页面加载了 Facebook Pixel 或 SDK', { url: 'https://connect.facebook.net/signals/config/' }));
+    chain.addNode(new ThoughtNode('script', 'simulation: page loads Facebook Pixel or SDK', { url: 'https://connect.facebook.net/signals/config/' }));
   } else if (url.includes('news') || url.includes('blog')) {
-    chain.addNode(new ThoughtNode('script', '模拟: 页面加载了广告跟踪器', { url: 'https://ads-tracking.com' }));
+    chain.addNode(new ThoughtNode('script', 'simulation: page loads advertisment tracker', { url: 'https://ads-tracking.com' }));
   }
   
-  chain.addNode(new ThoughtNode('storage', '模拟: 网站可能使用 localStorage 存储数据', { type: 'localStorage', itemCount: 5 }));
+  chain.addNode(new ThoughtNode('storage', 'simulation: the website may use localStorage to stor data', { type: 'localStorage', itemCount: 5 }));
   
   return chain;
 }
@@ -44,13 +44,13 @@ async function simplifiedTrack(url) {
  * @returns {Promise<ThoughtChain>} - Chain of observed behaviors
  */
 async function trackWebsite(url) {
-  // 如果 Puppeteer 不可用，使用简化版跟踪
+  
   if (!puppeteer) {
-    console.warn('Puppeteer 不可用，使用简化版跟踪功能');
+    console.warn('Puppeteer does not function well，use the simplified tracking function');
     return simplifiedTrack(url);
   }
   
-  console.log(`开始跟踪网站: ${url}`);
+  console.log(`now track website: ${url}`);
   const chain = new ThoughtChain(url);
   
   let browser;
@@ -78,7 +78,7 @@ async function trackWebsite(url) {
       ];
       
       if (trackerPatterns.some(pattern => pattern.test(url))) {
-        chain.addNode(new ThoughtNode('request', `页面请求了跟踪器 ${url}`, { url }));
+        chain.addNode(new ThoughtNode('request', `website request the tracker ${url}`, { url }));
       }
     });
     
@@ -103,8 +103,8 @@ async function trackWebsite(url) {
     await page.evaluateOnNewDocument(cookieAccessDetectionScript);
     
     // Navigate to the URL
-    chain.addNode(new ThoughtNode('navigation', `访问网站 ${url}`, { url }));
-    console.log(`正在访问 ${url}...`);
+    chain.addNode(new ThoughtNode('navigation', `visit website ${url}`, { url }));
+    console.log(`now visiting ${url}...`);
     
     try {
       await page.goto(url, { 
@@ -112,9 +112,9 @@ async function trackWebsite(url) {
         timeout: 30000
       });
     } catch (navError) {
-      console.warn(`导航到 ${url} 时超时或错误: ${navError.message}`);
-      // 即使导航失败也继续检测
-      chain.addNode(new ThoughtNode('error', `导航到网站失败: ${navError.message}`, { error: true }));
+      console.warn(`navigate  to ${url} error happed: ${navError.message}`);
+     
+      chain.addNode(new ThoughtNode('error', `navigaton error: ${navError.message}`, { error: true }));
     }
     
     // Wait a bit more for any deferred scripts
@@ -129,11 +129,11 @@ async function trackWebsite(url) {
     });
     
     if (cookieActivity.cookieRead) {
-      chain.addNode(new ThoughtNode('cookie', '脚本读取了 document.cookie', { action: 'read' }));
+      chain.addNode(new ThoughtNode('cookie', 'Script reads document.cookie', { action: 'read' }));
     }
     
     if (cookieActivity.cookieWritten) {
-      chain.addNode(new ThoughtNode('cookie', '脚本写入了 document.cookie', { action: 'write' }));
+      chain.addNode(new ThoughtNode('cookie', 'Script reads document.cookie', { action: 'write' }));
     }
     
     // Check for localStorage and sessionStorage access
@@ -153,14 +153,14 @@ async function trackWebsite(url) {
     });
     
     if (storageActivity.localStorageItems > 0) {
-      chain.addNode(new ThoughtNode('storage', `网站使用 localStorage 存储了 ${storageActivity.localStorageItems} 项数据`, { 
+      chain.addNode(new ThoughtNode('storage', `the website uses localStorage to store ${storageActivity.localStorageItems} data`, { 
         type: 'localStorage', 
         itemCount: storageActivity.localStorageItems 
       }));
     }
     
     if (storageActivity.sessionStorageItems > 0) {
-      chain.addNode(new ThoughtNode('storage', `网站使用 sessionStorage 存储了 ${storageActivity.sessionStorageItems} 项数据`, { 
+      chain.addNode(new ThoughtNode('storage', `website use sessionStorage to store ${storageActivity.sessionStorageItems} data`, { 
         type: 'sessionStorage', 
         itemCount: storageActivity.sessionStorageItems 
       }));
@@ -174,11 +174,11 @@ async function trackWebsite(url) {
     });
     
     const knownTrackers = {
-      'facebook': 'Facebook Pixel 或 SDK',
+      'facebook': 'Facebook Pixel or SDK',
       'google-analytics': 'Google Analytics',
       'gtag': 'Google Tag Manager',
       'google-tag': 'Google Tag Manager',
-      'doubleclick': 'DoubleClick (Google广告)',
+      'doubleclick': 'DoubleClick (Google)',
       'tiktok': 'TikTok Pixel',
       'twitter': 'Twitter Pixel',
       'amplitude': 'Amplitude Analytics',
@@ -190,7 +190,7 @@ async function trackWebsite(url) {
     thirdPartyScripts.forEach(scriptUrl => {
       for (const [key, name] of Object.entries(knownTrackers)) {
         if (scriptUrl.includes(key)) {
-          chain.addNode(new ThoughtNode('script', `页面加载了 ${name}`, { url: scriptUrl }));
+          chain.addNode(new ThoughtNode('script', `website loads ${name}`, { url: scriptUrl }));
           break;
         }
       }
@@ -219,29 +219,29 @@ async function trackWebsite(url) {
     });
     
     if (fingerprintingMethods.includes('canvas')) {
-      chain.addNode(new ThoughtNode('fingerprinting', '网站使用 Canvas API 可能进行指纹识别', { method: 'canvas' }));
+      chain.addNode(new ThoughtNode('fingerprinting', 'website use Canvas API to identify fingerprint', { method: 'canvas' }));
     }
     
     if (fingerprintingMethods.includes('webrtc')) {
-      chain.addNode(new ThoughtNode('fingerprinting', '网站使用 WebRTC API 可能获取本地IP地址', { method: 'webrtc' }));
+      chain.addNode(new ThoughtNode('fingerprinting', 'the website uses WebRTC API to get address', { method: 'webrtc' }));
     }
     
     return chain;
   } catch (error) {
-    console.error(`跟踪网站时出错: ${error.message}`);
-    // 即使出错，也返回一个带有错误信息的链
-    chain.addNode(new ThoughtNode('error', `跟踪过程出错: ${error.message}`, { error: true }));
+    console.error(`error while tracking website: ${error.message}`);
     
-    // 在出错时使用简化版跟踪来提供一些基本数据
+    chain.addNode(new ThoughtNode('error', `error while tracking website: ${error.message}`, { error: true }));
+    
+   
     if (chain.nodes.length < 2) {
-      console.log('使用简化版跟踪作为备用');
+      console.log('use simplified function for backup');
       return simplifiedTrack(url);
     }
     
     return chain;
   } finally {
     if (browser) {
-      await browser.close().catch(err => console.warn('关闭浏览器时出错:', err.message));
+      await browser.close().catch(err => console.warn('error while closing website:', err.message));
     }
   }
 }
